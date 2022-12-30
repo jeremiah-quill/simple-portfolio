@@ -23,7 +23,7 @@ export default function Home() {
           </header>
           <div className="p-4">
             <p>
-              Welcome to my corner of the internet. &apos; a self-taught developer, and I like to
+              Welcome to my corner of the internet. I&apos;m a self-taught developer, and I like to
               build cool things on the web. Check back soon for more updates:
             </p>
             <ul className="m-4">
