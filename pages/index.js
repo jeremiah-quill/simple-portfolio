@@ -23,8 +23,8 @@ export default function Home() {
           </header>
           <div className="p-4">
             <p>
-              Welcome to my corner of the internet. I'm a self-taught developer, and I like to build
-              cool things on the web. Check back soon for more updates:
+              Welcome to my corner of the internet. &apos; a self-taught developer, and I like to
+              build cool things on the web. Check back soon for more updates:
             </p>
             <ul className="m-4">
               <li>Synced spotify player</li>
@@ -40,24 +40,27 @@ export default function Home() {
               <a
                 href="https://github.com/jeremiah-quill"
                 target="_blank"
+                rel="noreferrer"
                 className="bg-slate-200 p-2 rounded-full w-[40px] h-[40px]">
                 <img src="/assets/images/logos/github.svg" className="" />
               </a>
               <a
                 href="https://www.linkedin.com/in/jeremiah-quill-281b06122/"
                 target="_blank"
+                rel="noreferrer"
                 className="bg-slate-200 p-2 rounded-full w-[40px] h-[40px]">
                 <img src="/assets/images/logos/linkedin.svg" className="" />
               </a>
               <a
                 href="https://open.spotify.com/user/jcq5010?si=86269fd6b7c94c56"
                 target="_blank"
+                rel="noreferrer"
                 className="bg-slate-200 p-2 rounded-full w-[40px] h-[40px]">
                 <img src="/assets/images/logos/spotify.svg" className="" />
               </a>
             </div>
             <div className="grid gap-2 text-sm">
-              <a href="https://www.mccormicktaylor.com/" target="_blank">
+              <a href="https://www.mccormicktaylor.com/" target="_blank" rel="noreferrer">
                 <div className="px-2 py-1 bg-white rounded-full text-slate-700 flex justify-between items-center relative border border-white">
                   <div>Designer II</div>
                   <img
