@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { RxCaretDown } from "react-icons/rx";
 
@@ -11,6 +11,20 @@ export default function Home() {
   function toggleMenu() {
     setMenuOpen(!menuOpen);
   }
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (menuOpen && event.keyCode === 27) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [menuOpen]);
 
   return (
     <>
@@ -32,6 +46,8 @@ export default function Home() {
           <div className="ml-auto relative">
             <button
               onClick={toggleMenu}
+              aria-haspopup="true"
+              aria-expanded={menuOpen}
               className={`flex gap-2 p-1 rounded items-center text-white font-bold hover:bg-slate-900 ${
                 menuOpen && "bg-slate-900"
               }`}
@@ -40,11 +56,18 @@ export default function Home() {
               <RxCaretDown className="text-xl" />
             </button>
             {menuOpen && (
-              <div className="absolute top-9 w-[200px] rounded p-1 backdrop-blur-sm bg-slate-500/50">
+              <div
+                // tabIndex="0"
+                role="menu"
+                aria-labelledby="buttonId"
+                className="absolute top-9 w-[200px] rounded p-1 backdrop-blur-sm bg-slate-500/50">
                 <section>
                   <ul>
                     <Link href="/projects">
-                      <li className="hover:bg-blue-500 rounded px-2 cursor-pointer">Projects</li>
+                      <div className="hover:bg-blue-500 rounded px-2 cursor-pointer">Projects</div>
+                    </Link>
+                    <Link href="/projects">
+                      <div className="hover:bg-blue-500 rounded px-2 cursor-pointer">Projects</div>
                     </Link>
                   </ul>
                 </section>
