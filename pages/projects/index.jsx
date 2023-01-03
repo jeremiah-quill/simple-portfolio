@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import { RxCaretDown } from "react-icons/rx";
 
-export default function projectsPage() {
+export default function ProjectsPage() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   function toggleMenu() {

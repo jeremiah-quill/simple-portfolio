@@ -56,7 +56,7 @@ export default function Home() {
           <p>
             Welcome to my corner of the internet. I&apos;m a self-taught developer, and I like to
             build cool things on the web. For now I&apos;ll be using this section to list my current
-            goals for the site. A "to-do" list of sorts.
+            goals for the site. A &quot;to-do&quot; list of sorts.
           </p>
           <ul className="m-4 list-disc">
             <li>
@@ -68,9 +68,9 @@ export default function Home() {
                 <details>
                   <summary className="cursor-pointer">Hotspots</summary>
                   <p className="text-xs p-4 m-4 bg-slate-500 rounded">
-                    A web application for creating a "hotspot" image with overlayed callouts.
-                    Generate the HTML, CSS, and JS required to easily display this feature on your
-                    site
+                    A web application for creating a &quot;hotspot&quot; image with overlayed
+                    callouts. Generate the HTML, CSS, and JS required to easily display this feature
+                    on your site
                   </p>
                 </details>
               </li>
