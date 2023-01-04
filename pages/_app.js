@@ -13,7 +13,7 @@ const routeConfig = {
   },
 };
 
-export default function customApp({ Component, pageProps }) {
+export default function CustomApp({ Component, pageProps }) {
   const { pathname } = useRouter();
 
   return (
