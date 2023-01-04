@@ -1,8 +1,26 @@
 import { useState, useEffect } from "react";
+
 import Link from "next/link";
+import { useRouter } from "next/router";
+
 import { RxCaretDown } from "react-icons/rx";
 
-export function Navbar({ currentRoute, allRoutes }) {
+const routeConfig = {
+  "/": {
+    title: "Home",
+  },
+  "/projects": {
+    title: "Projects",
+  },
+  default: {
+    title: "",
+  },
+};
+
+export function Navbar() {
+  const { pathname } = useRouter();
+  const currentRoute = routeConfig[pathname] || routeConfig.default;
+
   const [menuOpen, setMenuOpen] = useState(false);
 
   function toggleMenu() {
@@ -53,10 +71,10 @@ export function Navbar({ currentRoute, allRoutes }) {
           className="absolute top-9 w-[300px] rounded p-1 backdrop-blur-sm bg-slate-500/50">
           <section>
             <ul>
-              {Object.keys(allRoutes).map((path) => (
+              {Object.keys(routeConfig).map((path) => (
                 <Link href={path} key={path} className="active:bg-blue-500">
                   <div className="hover:bg-blue-500 active:bg-blue-500 rounded px-2 cursor-pointer">
-                    {allRoutes[path].title}
+                    {routeConfig[path].title}
                   </div>
                 </Link>
               ))}

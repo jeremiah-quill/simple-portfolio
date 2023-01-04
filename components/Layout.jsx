@@ -1,21 +1,6 @@
-import { useRouter } from "next/router";
-
 import { Navbar } from "./Navbar";
 
-const routeConfig = {
-  "/": {
-    title: "Home",
-  },
-  "/projects": {
-    title: "Projects",
-  },
-};
-
 export default function Layout({ children }) {
-  const allRoutes = routeConfig;
-  const { pathname } = useRouter();
-  const currentRoute = routeConfig[pathname];
-
   return (
     <div className="p-2 grid place-items-center h-screen bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-red-200 via-red-300 to-yellow-200">
       <main className="bg-slate-700 rounded-md w-[32rem] h-[31rem] flex flex-col">
@@ -25,7 +10,7 @@ export default function Layout({ children }) {
             <div className="w-[15px] h-[15px] rounded-full bg-orange-300"></div>
             <div className="w-[15px] h-[15px] rounded-full bg-green-500"></div>
           </div>
-          <Navbar {...{ currentRoute, allRoutes }} />
+          <Navbar />
         </header>
         <div className="p-4 flex-1 overflow-y-scroll">{children}</div>
         <footer className="p-4 flex justify-between border-t border-slate-500">
