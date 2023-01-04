@@ -1,6 +1,21 @@
+import { useRouter } from "next/router";
+
 import { Navbar } from "./Navbar";
 
-export default function Layout({ children, currentRoute, allRoutes }) {
+const routeConfig = {
+  "/": {
+    title: "Home",
+  },
+  "/projects": {
+    title: "Projects",
+  },
+};
+
+export default function Layout({ children }) {
+  const allRoutes = routeConfig;
+  const { pathname } = useRouter();
+  const currentRoute = routeConfig[pathname];
+
   return (
     <div className="p-2 grid place-items-center h-screen bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-red-200 via-red-300 to-yellow-200">
       <main className="bg-slate-700 rounded-md w-[32rem] h-[31rem] flex flex-col">
