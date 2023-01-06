@@ -1,6 +1,10 @@
 import { Navbar } from "./Navbar";
 import { Musicbar } from "./Musicbar";
+import { RepoUpdateTracker } from "./RepoUpdateTracker";
 
+// TODO:
+// add functionality + extract the top left buttons
+// extract link pills
 export default function Layout({ children }) {
   return (
     <div className="grid place-items-center h-screen bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-red-200 via-red-300 to-yellow-200">
@@ -17,30 +21,8 @@ export default function Layout({ children }) {
           <div className="p-4 flex-1 overflow-y-scroll">{children}</div>
           <footer className="p-4 flex justify-between border-t border-slate-500">
             <div className="grid gap-2">
-              <div className="italic text-xs font-thin text-slate-300">Last updated: 1/3/2023</div>
-              <div className="flex gap-2 place-self-end">
-                <a
-                  href="https://github.com/jeremiah-quill"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="bg-slate-200 p-2 rounded-full w-[40px] h-[40px]">
-                  <img src="/assets/images/logos/github.svg" className="" />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/jeremiah-quill-281b06122/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="bg-slate-200 p-2 rounded-full w-[40px] h-[40px]">
-                  <img src="/assets/images/logos/linkedin.svg" className="" />
-                </a>
-                <a
-                  href="https://open.spotify.com/user/jcq5010?si=86269fd6b7c94c56"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="bg-slate-200 p-2 rounded-full w-[40px] h-[40px]">
-                  <img src="/assets/images/logos/spotify.svg" className="" />
-                </a>
-              </div>
+              <RepoUpdateTracker />
+              <Socialbar />
             </div>
             <div className="grid gap-2 text-sm">
               <a href="https://www.mccormicktaylor.com/" target="_blank" rel="noreferrer">
@@ -62,20 +44,34 @@ export default function Layout({ children }) {
         </main>
       </div>
       <Musicbar />
-      {/* <div className="bg-black w-full absolute bottom-0 p-4 grid place-items-center">
-        <div className="relative p-2 w-full max-w-[30rem]">
-          <button className="absolute -top-[40px] -right-[20px] bg-white text-black rounded-md p-2">
-            Expand
-          </button>
-          <div className="flex gap-4 bg-blue-500 p-2 rounded-md">
-            <img src="/assets/images/album-art.png" className="w-[50px]" />
-            <div>
-              <div className="text-xl font-thin">track name</div>
-              <div className="text-sm">artist - album</div>
-            </div>
-          </div>
-        </div>
-      </div> */}
+    </div>
+  );
+}
+
+function Socialbar() {
+  return (
+    <div className="flex gap-2 place-self-end">
+      <a
+        href="https://github.com/jeremiah-quill"
+        target="_blank"
+        rel="noreferrer"
+        className="bg-slate-200 p-2 rounded-full w-[40px] h-[40px]">
+        <img src="/assets/images/logos/github.svg" className="" />
+      </a>
+      <a
+        href="https://www.linkedin.com/in/jeremiah-quill-281b06122/"
+        target="_blank"
+        rel="noreferrer"
+        className="bg-slate-200 p-2 rounded-full w-[40px] h-[40px]">
+        <img src="/assets/images/logos/linkedin.svg" className="" />
+      </a>
+      <a
+        href="https://open.spotify.com/user/jcq5010?si=86269fd6b7c94c56"
+        target="_blank"
+        rel="noreferrer"
+        className="bg-slate-200 p-2 rounded-full w-[40px] h-[40px]">
+        <img src="/assets/images/logos/spotify.svg" className="" />
+      </a>
     </div>
   );
 }
