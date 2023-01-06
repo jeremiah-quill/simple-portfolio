@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter, router } from "next/router";
 
 import { RxCaretDown } from "react-icons/rx";
 
@@ -18,7 +18,10 @@ const routeConfig = {
 };
 
 export function Navbar() {
+  const [currentPageIdx, setCurrentPageIdx] = useState(0);
+
   const { pathname } = useRouter();
+
   const currentRoute = routeConfig[pathname] || routeConfig.default;
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -27,12 +30,27 @@ export function Navbar() {
     setMenuOpen(!menuOpen);
   }
 
+  const handleKeyDown = (event) => {
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      setCurrentPageIdx((currentPageIdx + 1) % Object.keys(routeConfig).length);
+    } else if (event.key === "ArrowUp") {
+      event.preventDefault();
+      setCurrentPageIdx(
+        (currentPageIdx - 1 + Object.keys(routeConfig).length) % Object.keys(routeConfig).length
+      );
+    } else if (event.key === "Enter") {
+      const path = Object.keys(routeConfig)[currentPageIdx];
+      router.push(path);
+    }
+  };
+
   useEffect(() => {
     setMenuOpen(false);
   }, [currentRoute]);
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
+    const handleEsc = (event) => {
       if (menuOpen && event.keyCode === 27) {
         setMenuOpen(false);
       }
@@ -42,11 +60,11 @@ export function Navbar() {
         setMenuOpen(false);
       }
     };
-    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("keydown", handleEsc);
     document.addEventListener("click", handleClick);
 
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("keydown", handleEsc);
       document.removeEventListener("click", handleClick);
     };
   }, [menuOpen]);
@@ -54,6 +72,7 @@ export function Navbar() {
   return (
     <div className="ml-auto relative">
       <button
+        onKeyDown={handleKeyDown}
         onClick={() => toggleMenu()}
         aria-haspopup="true"
         aria-label="menu-buton"
@@ -71,9 +90,16 @@ export function Navbar() {
           className="absolute top-9 w-[300px] rounded p-1 backdrop-blur-sm bg-slate-500/50">
           <section>
             <ul>
-              {Object.keys(routeConfig).map((path) => (
-                <Link href={path} key={path} className="active:bg-blue-500">
-                  <div className="hover:bg-blue-500 active:bg-blue-500 rounded px-2 cursor-pointer">
+              {Object.keys(routeConfig).map((path, idx) => (
+                <Link
+                  aria-selected={idx === currentPageIdx}
+                  href={path}
+                  key={path}
+                  className="active:bg-blue-500">
+                  <div
+                    className={`hover:bg-blue-500 active:bg-blue-500 rounded px-2 cursor-pointer ${
+                      currentPageIdx === idx && "bg-blue-500"
+                    }`}>
                     {routeConfig[path].title}
                   </div>
                 </Link>
