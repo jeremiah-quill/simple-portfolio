@@ -95,6 +95,7 @@ export function Navbar() {
                   aria-selected={idx === currentPageIdx}
                   href={path}
                   key={path}
+                  onMouseEnter={() => setCurrentPageIdx(idx)}
                   className="active:bg-blue-500">
                   <div
                     className={`hover:bg-blue-500 active:bg-blue-500 rounded px-2 cursor-pointer ${
