@@ -1,6 +1,6 @@
 import { Navbar } from "./Navbar";
 import { Musicbar } from "./Musicbar";
-import { RepoUpdateTracker } from "./RepoUpdateTracker";
+import { GithubStats } from "./GithubStats";
 
 // TODO:
 // add functionality + extract the top left buttons
@@ -21,7 +21,7 @@ export default function Layout({ children }) {
           <div className="p-4 flex-1 overflow-y-scroll">{children}</div>
           <footer className="p-4 flex justify-between border-t border-slate-500">
             <div className="grid gap-2">
-              <RepoUpdateTracker />
+              <GithubStats />
               <Socialbar />
             </div>
             <div className="grid gap-2 text-sm">
