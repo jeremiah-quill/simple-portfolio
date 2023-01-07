@@ -7,8 +7,13 @@ export function GithubStats() {
     async function getRepoData() {
       const response = await fetch("/api/getGithubData");
       const data = await response.json();
-      setRepoData({ lastModified: data.data.headers["last-modified"], commitCount: 10 });
-      console.log(data);
+
+      const dateString = data.data.headers["last-modified"];
+      const date = new Date(dateString);
+      const options = { year: "numeric", month: "long", day: "numeric" };
+      const formattedDate = date.toLocaleDateString("en-US", options);
+
+      setRepoData({ lastModified: formattedDate, commitCount: 10 });
     }
     getRepoData();
   }, []);
