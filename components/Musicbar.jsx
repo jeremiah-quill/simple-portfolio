@@ -1,11 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function Musicbar() {
   const [open, setOpen] = useState(false);
+  const [track, setTrack]= useState({})
+
+  useEffect(() => {
+    async function getTrack() {
+      const res = await fetch("/api/getSpotifyHistory")
+      const track = await res.json()
+      console.log(track)
+      setTrack(track)
+    }
+    getTrack()
+  }, [])
 
   function toggle() {
     setOpen(!open);
   }
+
+  useEffect(() => {
+
+  })
 
   if (!open)
     return (
@@ -19,10 +34,12 @@ export function Musicbar() {
           <TrackPill
             isPrimary={true}
             track={{
-              trackName: "primary track",
-              artist: "primary artist",
-              album: "primary album",
-              src: "/assets/images/album-art.png",
+              trackName: track.title,
+              artist: track.artist,
+              album: track.album,
+              src: track.albumImageUrl,
+              progress: track.progress,
+              duration: track.duration
             }}
             percentage={20}
           />
