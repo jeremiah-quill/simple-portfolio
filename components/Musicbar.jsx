@@ -18,10 +18,6 @@ export function Musicbar() {
     setOpen(!open);
   }
 
-  useEffect(() => {
-
-  })
-
   if (!open)
     return (
       <div className="bg-black w-full absolute bottom-0 p-4 grid place-items-center group">
