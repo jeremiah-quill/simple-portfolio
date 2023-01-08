@@ -50,7 +50,7 @@ export default function Layout({ children }) {
 
 function Socialbar() {
   return (
-    <div className="flex gap-2 place-self-end">
+    <div className="flex gap-2">
       <a
         href="https://github.com/jeremiah-quill"
         target="_blank"

@@ -19,12 +19,10 @@ const routeConfig = {
 
 export function Navbar() {
   const [currentPageIdx, setCurrentPageIdx] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const { pathname } = useRouter();
-
   const currentRoute = routeConfig[pathname] || routeConfig.default;
-
-  const [menuOpen, setMenuOpen] = useState(false);
 
   function toggleMenu() {
     setMenuOpen(!menuOpen);
@@ -51,7 +49,7 @@ export function Navbar() {
 
   useEffect(() => {
     const handleEsc = (event) => {
-      if (menuOpen && event.keyCode === 27) {
+      if (event.keyCode === 27) {
         setMenuOpen(false);
       }
     };

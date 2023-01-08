@@ -21,9 +21,10 @@ export function Musicbar() {
             track={{
               trackName: "primary track",
               artist: "primary artist",
-              ablum: "primary album",
+              album: "primary album",
               src: "/assets/images/album-art.png",
             }}
+            percentage={20}
           />
         </div>
       </div>
@@ -37,15 +38,15 @@ export function Musicbar() {
           className="absolute -top-[40px] right-0 bg-white text-black rounded-md p-2 hover:bg-slate-300">
           Collapse
         </button>
-        <div>test</div>
         <TrackPill
           isPrimary={true}
           track={{
             trackName: "primary track",
             artist: "primary artist",
-            ablum: "primary album",
+            album: "primary album",
             src: "/assets/images/album-art.png",
           }}
+          percentage={10}
         />
         <div className=" rounded-md mt-4">
           <ul>
@@ -56,9 +57,10 @@ export function Musicbar() {
                 track={{
                   trackName: "track name",
                   artist: "artist",
-                  ablum: "album",
+                  album: "album",
                   src: "/assets/images/album-art.png",
                 }}
+                percentage={90}
               />
             ))}
           </ul>
@@ -68,16 +70,21 @@ export function Musicbar() {
   );
 }
 
-function TrackPill({ track, isPrimary }) {
+function TrackPill({ track, isPrimary, percentage }) {
   const { album, artist, trackName, src } = track;
+
   return (
-    <div className={`flex gap-4 p-2 rounded-md ${isPrimary && "bg-blue-500"}`}>
-      <img src={src} className="w-[50px]" />
-      <div>
+    <div className={`flex gap-4 p-2 rounded-md ${isPrimary && "bg-slate-700"}`}>
+      <img src={src} className="w-[72px]" />
+      <div className="flex flex-col flex-1">
         <div className="text-xl font-thin">{trackName}</div>
         <div className="text-sm">
           {artist} - {album}
         </div>
+        <div
+          style={{ width: `${percentage}%` }}
+          className={`h-[5px] bg-green-500 mt-auto rounded-full mb-2`}
+        />
       </div>
     </div>
   );
