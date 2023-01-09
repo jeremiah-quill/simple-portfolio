@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import useSWR from "swr";
+
 import { fetcher } from "../utils";
 
 export function Musicbar() {
-  const { data: track, error, isLoading } = useSWR("/api/getSpotifyHistory", fetcher);
+  const { data: track, error, isLoading, mutate } = useSWR("/api/getSpotifyHistory", fetcher);
   const [open, setOpen] = useState(false);
 
   if (error) return <div>failed to load</div>;
@@ -12,6 +13,12 @@ export function Musicbar() {
   function toggle() {
     setOpen(!open);
   }
+
+  function refreshSong() {
+    mutate("/api/getSpotifyHistory");
+  }
+
+  if (track.message) return <div>{track.message}</div>;
 
   if (!open)
     return (
@@ -32,7 +39,7 @@ export function Musicbar() {
               progress: track.progress,
               duration: track.duration,
             }}
-            percentage={20}
+            onTrackEnd={refreshSong}
           />
         </div>
       </div>
@@ -78,8 +85,43 @@ export function Musicbar() {
   );
 }
 
-function TrackPill({ track, isPrimary, percentage }) {
-  const { album, artist, trackName, src } = track;
+function TrackPill({ track, isPrimary, onTrackEnd = () => {} }) {
+  const { album, artist, trackName, src, progress, duration } = track;
+
+  const [elapsed, setElapsed] = useState(progress);
+  const [total, setTotal] = useState(duration);
+
+  // TODO: clean up this code
+  useEffect(() => {
+    setElapsed(progress);
+    setTotal(duration);
+
+    let currentProgress = progress;
+    let currentTotal = duration;
+
+    const interval = setInterval(() => {
+      if (currentProgress >= currentTotal) {
+        clearInterval(interval);
+        setElapsed(duration);
+        onTrackEnd();
+        return;
+      }
+      currentProgress = currentProgress + 1000;
+      setElapsed(currentProgress);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [duration, progress]);
+
+  const progressWidth = (elapsed / total) * 100;
+  function formatTime(ms) {
+    const minutes = Math.floor(ms / 60000);
+    const secondsLeft = (Math.floor(ms % 60000) / 1000).toFixed(0);
+    const formattedSeconds = secondsLeft < 10 ? `0${secondsLeft}` : secondsLeft;
+
+    if (formattedSeconds === "60") return `${minutes + 1}:00`;
+
+    return `${minutes}:${formattedSeconds}`;
+  }
 
   return (
     <div className={`flex gap-4 p-2 rounded-md ${isPrimary && "bg-slate-700"}`}>
@@ -89,10 +131,16 @@ function TrackPill({ track, isPrimary, percentage }) {
         <div className="text-sm">
           {artist} - {album}
         </div>
-        <div
-          style={{ width: `${percentage}%` }}
-          className={`h-[5px] bg-green-500 mt-auto rounded-full mb-2`}
-        />
+        <div className="flex items-center gap-2">
+          <div>{`${formatTime(elapsed)}`}</div>
+          <div className="flex-1 flex">
+            <div
+              style={{ width: `${progressWidth}%` }}
+              className={`h-[5px] bg-green-500 rounded-full`}
+            />
+          </div>
+          <div>{`${formatTime(duration)}`}</div>
+        </div>
       </div>
     </div>
   );

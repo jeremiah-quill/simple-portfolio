@@ -31,11 +31,19 @@ export const getCurrentlyPlaying = async () => {
     },
   });
 
-  if (res.status === 204 || res.status > 400) return;
+  // TODO: handle all responses
+  if (res.status === 204) return { message: "No song is currently playing" };
+  if (res.status === 401) return { message: "Unauthorized" };
+  if (res.status === 404) return { message: "Not Found" };
+  if (res.status === 429) return { message: "Too Many Requests" };
+  if (res.status === 500) return { message: "Internal Server Error" };
+  if (res.status === 502) return { message: "Bad Gateway" };
+  if (res.status === 503) return { message: "Service Unavailable" };
+  if (res.status === 504) return { message: "Gateway Timeout" };
 
   const song = await res.json();
 
-  if (!song) return;
+  if (!song) return { message: "Song not found" };
 
   const isPlaying = song.is_playing;
   const title = song.item.name;
