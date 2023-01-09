@@ -1,18 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import useSWR from "swr";
+import { fetcher } from "../utils";
 
 export function Musicbar() {
+  const { data: track, error, isLoading } = useSWR("/api/getSpotifyHistory", fetcher);
   const [open, setOpen] = useState(false);
-  const [track, setTrack]= useState({})
 
-  useEffect(() => {
-    async function getTrack() {
-      const res = await fetch("/api/getSpotifyHistory")
-      const track = await res.json()
-      console.log(track)
-      setTrack(track)
-    }
-    getTrack()
-  }, [])
+  if (error) return <div>failed to load</div>;
+  if (isLoading) return <div>loading...</div>;
 
   function toggle() {
     setOpen(!open);
@@ -35,7 +30,7 @@ export function Musicbar() {
               album: track.album,
               src: track.albumImageUrl,
               progress: track.progress,
-              duration: track.duration
+              duration: track.duration,
             }}
             percentage={20}
           />

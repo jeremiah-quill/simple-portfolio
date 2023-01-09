@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
-  const track = await getCurrentlyPlaying()
-  res.status(200).json( track );
+  const track = await getCurrentlyPlaying();
+  res.status(200).json(track);
 }
 
 export const getToken = async () => {
