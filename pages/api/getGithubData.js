@@ -11,5 +11,10 @@ export default async function handler(req, res) {
   // TODO: test this
   if (data.status !== 200) return res.status(500).json({ error: "Something went wrong" });
 
-  res.status(200).json({ data });
+  const dateString = data.headers["last-modified"];
+  const date = new Date(dateString);
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  const lastModified = date.toLocaleDateString("en-US", options);
+
+  res.status(200).json({ lastModified });
 }
