@@ -78,7 +78,7 @@ export function Navbar() {
         className={`flex gap-2 p-1 rounded items-center text-white font-bold hover:bg-slate-900 ${
           menuOpen && "bg-slate-900"
         }`}>
-        <h1>{currentRoute.title}</h1>
+        <h1 className="font-thin">{currentRoute.title}</h1>
         <RxCaretDown className="text-xl" />
       </button>
       {menuOpen && (
@@ -94,7 +94,7 @@ export function Navbar() {
                   href={path}
                   key={path}
                   onMouseEnter={() => setCurrentPageIdx(idx)}
-                  className="active:bg-blue-500">
+                  className="active:bg-blue-500 font-thin">
                   <div
                     className={`hover:bg-blue-500 active:bg-blue-500 rounded px-2 cursor-pointer ${
                       currentPageIdx === idx && "bg-blue-500"

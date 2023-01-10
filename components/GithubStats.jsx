@@ -8,10 +8,12 @@ export function GithubStats() {
       const response = await fetch("/api/getGithubData");
       const data = await response.json();
 
-      const dateString = data.data.headers["last-modified"];
+      const dateString = data.data.data["pushed_at"];
       const date = new Date(dateString);
       const options = { year: "numeric", month: "long", day: "numeric" };
       const formattedDate = date.toLocaleDateString("en-US", options);
+
+      console.log(data);
 
       setRepoData({ lastModified: formattedDate, commitCount: 10 });
     }

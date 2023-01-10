@@ -12,7 +12,7 @@ export default function ProjectsPage() {
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       </Head>
       <div className="grid place-items-center h-full">
-        <p>Working on it...</p>
+        <p className="font-thin">Working on it...</p>
       </div>
     </>
   );

@@ -8,8 +8,16 @@ import { GithubStats } from "./GithubStats";
 export default function Layout({ children }) {
   return (
     <div className="grid place-items-center h-screen bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-red-200 via-red-300 to-yellow-200">
+      <div className="absolute top-5 right-5 p-1 pr-4 shadow-lg bg-slate-700 rounded-full flex items-center gap-2">
+        <img
+          src="assets/images/bio-image.png"
+          alt="Jeremiah Quill"
+          className="rounded-full w-10 shadow-lg border-2 border-white"
+        />
+        <h1 className="text-xl font-thin">Jeremiah Quill</h1>
+      </div>
       <div className="p-2 w-full max-w-[32rem] ">
-        <main className="bg-slate-700 rounded-md h-[31rem] flex flex-col">
+        <main className="bg-slate-700 rounded-md h-[31rem] flex flex-col shadow-lg">
           <header className="border-b border-slate-500 p-4 py-2 flex items-center gap-8">
             <div className="flex gap-1">
               <div className="w-[15px] h-[15px] rounded-full bg-red-500"></div>
