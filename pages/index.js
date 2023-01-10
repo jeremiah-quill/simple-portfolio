@@ -14,7 +14,7 @@ export default function Home() {
       <h1 className="font-bold text-3xl mb-16">Welcome 👋</h1>
       <div className="grid gap-4 font-thin">
         <p>
-          My name is <span className="px-1 bg-slate-500 rounded-lg">Jeremiah</span>, I'm a web
+          My name is <span className="px-1 bg-slate-500 rounded-lg">Jeremiah</span>, I&apos;m a web
           developer, and this is my corner of the internet.
         </p>
         <p>This website is currently under construction but new features are rolling out weekly.</p>
