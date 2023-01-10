@@ -27,7 +27,7 @@ export default function Layout({ children }) {
             <div className="grid gap-2 text-sm">
               <a href="https://www.mccormicktaylor.com/" target="_blank" rel="noreferrer">
                 <div className="px-2 py-1 bg-white rounded-full text-slate-700 flex justify-between items-center relative border border-white">
-                  <div>Designer II</div>
+                  <div className="pr-8">Web Developer II</div>
                   <img
                     src="/assets/images/logos/mt-logo.svg"
                     className="rounded-full w-[28px] absolute right-0"
